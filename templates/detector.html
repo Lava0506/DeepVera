@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepVera - New Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#33d1a9', 
+                        darkbg: '#065941',
+                        cardbg: '#1e3b30'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkbg text-white font-sans antialiased h-screen flex flex-col">
+
+  
+    <header class="w-full border-b border-gray-700 bg-cardbg">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-2 group">
+                <div class="w-8 h-8 bg-brand rounded-lg flex items-center justify-center font-bold text-lg group-hover:scale-105 transition">D</div>
+                <span class="text-xl font-bold tracking-wide">Deep<span class="text-brand">Vera</span></span>
+            </a>
+            <div class="flex items-center space-x-6">
+                <a href="/" class="text-gray-400 hover:text-white text-sm font-semibold transition flex items-center">
+                    <span class="mr-2">&larr;</span> Back to Home
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area (Layout inspired by image_2.png) -->
+    <main class="flex-grow flex container mx-auto px-6 py-10">
+        
+        <!-- Left Panel: Actions (QuillBot style) -->
+        <aside class="w-64 border-r border-gray-700 pr-10">
+            <h2 class="text-xs text-gray-500 font-bold uppercase tracking-wider mb-6">Actions</h2>
+            <nav class="space-y-4">
+                <a href="#" class="flex items-center text-brand bg-cardbg p-3 rounded-lg border border-brand font-semibold shadow-inner">
+                    <span class="mr-3">🆕</span>
+                    New Analysis
+                </a>
+                <a href="#" class="flex items-center text-gray-400 hover:text-white p-3 rounded-lg transition group">
+                    <span class="mr-3 group-hover:text-white">📜</span>
+                    Analysis History
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Right Panel: Main Input Area -->
+        <section class="flex-grow pl-10 flex flex-col">
+            <div class="mb-10">
+                <h1 class="text-4xl font-extrabold mb-3">Begin Deepfake Detection</h1>
+                <p class="text-gray-400 max-w-lg">Upload an MP4 video (max 50MB) to analyze it with our cutting-edge DeepVera AI model for digital manipulation.</p>
+            </div>
+
+            <!-- Massive File Upload Zone (Inspired by the file-centric layout in image_2.png) -->
+            <!-- Massive File Upload Zone & Link Input -->
+            <form action="/upload" method="POST" enctype="multipart/form-data" class="flex-grow flex flex-col space-y-6">
+                
+                <!-- NEW: Link Input Area -->
+                <div class="flex items-center bg-darkbg border border-gray-700 rounded-xl overflow-hidden shadow-inner focus-within:border-brand transition">
+                    <div class="px-4 text-gray-500">🔗</div>
+                    <input type="url" name="video_url" placeholder="Paste Instagram, YouTube, TikTok, or Twitter link here..." class="w-full bg-transparent text-white py-4 outline-none placeholder-gray-400">
+                    <button type="submit" class="bg-cardbg hover:bg-brand border-l border-gray-700 hover:border-brand px-6 py-4 font-bold transition">Analyze Link</button>
+                </div>
+
+                <div class="flex items-center justify-center space-x-4">
+                    <hr class="w-1/3 border-gray-700">
+                    <span class="text-gray-500 text-sm font-bold uppercase tracking-widest">OR</span>
+                    <hr class="w-1/3 border-gray-700">
+                </div>
+
+                <!-- Existing Drag & Drop Area -->
+                <label class="flex-grow border-4 border-dashed border-gray-700 hover:border-brand rounded-3xl cursor-pointer bg-cardbg hover:bg-darkbg transition flex flex-col items-center justify-center p-10 text-center relative group">
+                    <div class="text-brand text-6xl mb-6 shadow-2xl group-hover:scale-110 transition-transform">📁</div>
+                    <h3 class="text-2xl font-bold mb-2">Drag & Drop Video</h3>
+                    <p class="text-gray-400 max-w-sm mb-6">or <span class="text-brand font-semibold">browse files</span> on your computer.</p>
+                    <div class="bg-darkbg px-5 py-3 rounded-xl border border-gray-700 text-xs text-gray-500 font-mono">Accepts: .mp4 files</div>
+                    
+                    <!-- We use Javascript here to auto-submit ONLY if a file is actually selected -->
+                    <input type="file" name="video_file" accept=".mp4" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="if(this.files.length > 0) this.form.submit();">
+                </label>
+            </form>
+            
+        </section>
+    </main>
+
+</body>
+</html>

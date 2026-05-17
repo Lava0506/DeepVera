@@ -1,0 +1,14 @@
+# Python Virtual Environment
+venv/
+__pycache__/
+
+# AI Models & Weights
+*.pth
+models/
+
+# Videos and Images
+*.mp4
+*.avi
+*.jpg
+extracted_frames/
+cropped_faces/

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepVera - Forensic Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#33d1a9', // The DeepVera Blue (Change to #10b981 for the Emerald Green!)
+                        darkbg: '#065941',
+                        cardbg: '#1e3b30'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkbg text-gray-200 font-sans antialiased min-h-screen flex flex-col items-center justify-center py-12">
+
+    <div class="w-full max-w-3xl container mx-auto px-6">
+        
+        <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+            <div class="text-xs font-mono text-gray-500 uppercase tracking-widest">DeepVera // Forensic Report</div>
+            <a href="/detector" class="text-xs font-mono text-brand hover:text-yellow-600 transition">&larr; New Scan</a>
+        </div>
+
+        {% if error %}
+            <div class="bg-cardbg border border-red-900/50 p-8 rounded-lg">
+                <h2 class="text-red-500 font-mono text-sm tracking-widest mb-2">ANALYSIS FAILED</h2>
+                <p class="text-gray-400 text-sm">{{ error }}</p>
+            </div>
+        {% else %}
+            <div class="bg-cardbg border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
+                
+                {% if explanation.color == 'red' %}
+                    <div class="h-1 w-full bg-red-500"></div>
+                {% elif explanation.color == 'green' %}
+                    <div class="h-1 w-full bg-green-500"></div>
+                {% else %}
+                    <div class="h-1 w-full bg-yellow-500"></div>
+                {% endif %}
+
+                <div class="p-10">
+                    <div class="mb-10">
+                        <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-4">Calculated Probability</p>
+                        <div class="flex items-baseline space-x-3">
+                            <h1 class="text-7xl font-black tracking-tighter text-white">{{ confidence }}%</h1>
+                            {% if explanation.color == 'red' %}
+                                <span class="text-3xl font-bold text-red-500 tracking-wide">{{ prediction }}</span>
+                            {% elif explanation.color == 'green' %}
+                                <span class="text-3xl font-bold text-green-500 tracking-wide">{{ prediction }}</span>
+                            {% else %}
+                                <span class="text-3xl font-bold text-yellow-500 tracking-wide">{{ prediction }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="bg-darkbg p-6 rounded-lg border border-gray-800/50">
+                        {% if explanation.color == 'red' %}
+                            <h2 class="text-red-500 font-mono text-sm tracking-widest mb-3">{{ explanation.title }}</h2>
+                        {% elif explanation.color == 'green' %}
+                            <h2 class="text-green-500 font-mono text-sm tracking-widest mb-3">{{ explanation.title }}</h2>
+                        {% else %}
+                            <h2 class="text-yellow-500 font-mono text-sm tracking-widest mb-3">{{ explanation.title }}</h2>
+                        {% endif %}
+                        
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            {{ explanation.text }}
+                        </p>
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-between border-t border-gray-800 pt-6">
+                        <div class="text-xs text-gray-500 font-mono">
+                            <span class="text-gray-400">Method:</span> MTCNN + ResNet18 (Temporal Ensemble)
+                        </div>
+                        <div class="text-xs text-gray-500 font-mono">
+                            <span class="text-gray-400">Frames Sampled:</span> 7 independent captures
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

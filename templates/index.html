@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepVera - Deepfake Detector</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#33d1a9', // The DeepVera Blue (Change to #10b981 for the Emerald Green!)
+                        darkbg: '#065941',
+                        cardbg: '#1e3b30'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkbg text-white font-sans antialiased selection:bg-brand selection:text-white">
+
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-brand rounded-lg flex items-center justify-center font-bold text-xl">D</div>
+            <span class="text-xl font-bold tracking-wide">Deep<span class="text-brand">Vera</span></span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-sm text-gray-300">
+            <a href="#" class="hover:text-brand transition">Home</a>
+            <a href="#about" class="hover:text-brand transition">About</a>
+            <a href="#features" class="hover:text-brand transition">Features</a>
+        </div>
+        <a href="/detector" class="bg-brand hover:bg-green-300 text-white px-5 py-2 rounded-md text-sm font-semibold transition">Get Started</a>
+    </nav>
+
+    <div class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
+        
+        <div class="md:w-1/2 flex flex-col space-y-6">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+                Detect Deepfakes. <br>
+                Trust <span class="text-brand">Reality.</span>
+            </h1>
+            <p class="text-gray-400 text-lg max-w-md">
+                DeepVera is an AI-powered system that detects manipulated videos with high accuracy, ensuring transparency and trust in the digital world.
+            </p>
+            
+            <form action="/upload" method="POST" enctype="multipart/form-data" class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                <label class="flex items-center justify-center bg-brand hover:bg-green-300 cursor-pointer text-white px-6 py-3 rounded-lg font-semibold transition shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                    Upload Video
+                    <input type="file" name="video_file" accept=".mp4" class="hidden" required onchange="this.form.submit()">
+                </label>
+                <a href="#" class="flex items-center justify-center border border-gray-600 hover:border-gray-400 px-6 py-3 rounded-lg font-semibold transition">
+                    Learn More &rarr;
+                </a>
+            </form>
+        </div>
+
+        <div class="md:w-1/2 mt-16 md:mt-0 relative flex justify-center">
+            <div class="w-96 h-96 border border-gray-700 rounded-xl bg-gradient-to-tr from-gray-800 to-gray-900 flex flex-col items-center justify-center shadow-2xl">
+                <span class="text-gray-500 font-mono text-sm"><img src="{{ url_for('static', filename='rf.jpg') }}" alt="Description" class="w-50 h-50 full" /></span>
+                
+                <div class="absolute top-10 left-[-25px] bg-cardbg border border-gray-700 p-3 rounded-lg shadow-lg">
+                    <p class="text-xs text-gray-400">REAL Confidence</p>
+                    <p class="text-green-400 font-bold">92.4%</p>
+                </div>
+                <div class="absolute bottom-10 right-[-25px] bg-cardbg border border-gray-700 p-3 rounded-lg shadow-lg">
+                    <p class="text-xs text-gray-400">FAKE Confidence</p>
+                    <p class="text-red-400 font-bold">7.6%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-cardbg p-6 rounded-xl border border-gray-700 hover:border-brand transition">
+                <div class="text-brand mb-4 text-3xl">🧠</div>
+                <h3 class="text-lg font-bold mb-2">AI-Powered Detection</h3>
+                <p class="text-gray-400 text-sm">Deep learning models analyze facial inconsistencies to detect deepfakes.</p>
+            </div>
+            <div class="bg-cardbg p-6 rounded-xl border border-gray-700 hover:border-green-400 transition">
+                <div class="text-green-400 mb-4 text-3xl">🔲</div>
+                <h3 class="text-lg font-bold mb-2">Frame-by-Frame</h3>
+                <p class="text-gray-400 text-sm">Each frame is carefully examined for manipulated patterns and anomalies.</p>
+            </div>
+            <div class="bg-cardbg p-6 rounded-xl border border-gray-700 hover:border-purple-400 transition">
+                <div class="text-purple-400 mb-4 text-3xl">👁️</div>
+                <h3 class="text-lg font-bold mb-2">Explainable AI</h3>
+                <p class="text-gray-400 text-sm">Advanced visual heatmaps highlight suspicious regions for interpretability.</p>
+            </div>
+            <div class="bg-cardbg p-6 rounded-xl border border-gray-700 hover:border-yellow-400 transition">
+                <div class="text-yellow-400 mb-4 text-3xl">🛡️</div>
+                <h3 class="text-lg font-bold mb-2">Secure & Reliable</h3>
+                <p class="text-gray-400 text-sm">Built with privacy and security in mind to ensure safe video analysis.</p>
+            </div>
+        </div>
+    </div>
+<section id="about" class="bg-cardbg py-24 border-y border-gray-800">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <h2 class="text-brand text-sm font-bold tracking-widest uppercase mb-3">About The Project</h2>
+            <h3 class="text-4xl font-extrabold mb-6">Securing the Authenticity of Digital Media</h3>
+            <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                As generative AI scales, distinguishing authentic human media from synthetic content has become a critical challenge. DeepVera is a robust computer vision pipeline engineered to detect micro-manipulations in video files. Utilizing an ensemble of convolutional neural networks, our system processes temporal frame data to identify statistical anomalies, pixel blending artifacts, and boundary inconsistencies that are invisible to the naked eye.
+            </p>
+        </div>
+    </section>
+
+    <section id="features" class="container mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+            <h2 class="text-brand text-sm font-bold tracking-widest uppercase mb-3">Core Capabilities</h2>
+            <h3 class="text-4xl font-extrabold">Engineered for Precision</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-cardbg p-8 rounded-xl border border-gray-700 hover:border-brand transition group">
+                <div class="text-brand mb-6 text-4xl group-hover:scale-110 transition-transform">🧠</div>
+                <h3 class="text-xl font-bold mb-3">AI-Powered Detection</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Deep learning architectures analyze complex facial inconsistencies and artifacting to verify biological authenticity.</p>
+            </div>
+            <div class="bg-cardbg p-8 rounded-xl border border-gray-700 hover:border-green-400 transition group">
+                <div class="text-green-400 mb-6 text-4xl group-hover:scale-110 transition-transform">🔲</div>
+                <h3 class="text-xl font-bold mb-3">Temporal Batching</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Cross-validates 15 independent frames across the video timeline to prevent single-frame anomalies from skewing results.</p>
+            </div>
+            <div class="bg-cardbg p-8 rounded-xl border border-gray-700 hover:border-purple-400 transition group">
+                <div class="text-purple-400 mb-6 text-4xl group-hover:scale-110 transition-transform">🔗</div>
+                <h3 class="text-xl font-bold mb-3">Universal Parsing</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Direct integration with yt-dlp allows seamless verification of URLs from YouTube, X, and direct MP4 uploads.</p>
+            </div>
+            <div class="bg-cardbg p-8 rounded-xl border border-gray-700 hover:border-yellow-400 transition group">
+                <div class="text-yellow-400 mb-6 text-4xl group-hover:scale-110 transition-transform">🛡️</div>
+                <h3 class="text-xl font-bold mb-3">Data Privacy</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Zero-retention architecture ensures that uploaded media is processed locally in RAM and never permanently stored.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-800 bg-cardbg py-8 mt-12">
+        <div class="container mx-auto px-6 text-center text-gray-500 text-sm font-semibold">
+            &copy; 2026 DeepVera. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
